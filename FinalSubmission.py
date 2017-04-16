@@ -2,7 +2,7 @@
 """
 Created on Wed Nov 23 15:39:24 2016
 
-@author: Rashmita Rout & Partha S Satpathy
+@author: Rashmita Rout 
 """
 ###################################IMPORT PACKAGES#############################
 import pandas as pd
@@ -21,8 +21,8 @@ from sklearn.grid_search import GridSearchCV
 ################################IMPORT TRAIN &TEST FILES#######################
 
 #first we must begin with importing the train and test dataset
-train = pd.read_csv("C:/Users/parth/Desktop/MIA/MidTerm/train.csv")
-test = pd.read_csv("C:/Users/parth/Desktop/MIA/MidTerm/test.csv")
+train = pd.read_csv("C:/Users/rashmita/Desktop/MidTerm/train.csv")
+test = pd.read_csv("C:/Users/rashmita/Desktop/MidTerm/test.csv")
 
 #converting the test and train datasets into dataframes
 train_df= pd.DataFrame(train)
@@ -55,7 +55,7 @@ test_df['EquiDiam'] = test_df['id']
 ##area, perimeter, aspect ratio and Diameter of all images
 for i in range(1,1584):
     #Path variable has the path for all 1584 images
-    path = 'C:/Users/parth/Desktop/MIA/MidTerm/Data/images/'+str(i)+'.jpg'
+    path = 'C:/Users/rashmita/Desktop/MidTerm/Data/images/'+str(i)+'.jpg'
     #Read the image details and store the details
     img = cv2.imread(path,0)
     ret,thresh = cv2.threshold(img,127,255,0)
@@ -98,13 +98,13 @@ for i in range(1,1584):
 #The train features will only have the predictor columns,i.e., 
 #Removing the unnecessary ID and the dependent variable Species
 train_features = train_df.drop(['id', 'species'], axis=1)
-#train_features.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/train_features_1.csv",index=False)
+#train_features.to_csv("C:/Users/rashmita/Desktop/MidTerm/train_features_1.csv",index=False)
 #Saving the dependent variable to train labels
 train_labels = train_df.pop('species')
-#train_labels.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/train_labels_1.csv",index=False)
+#train_labels.to_csv("C:/Users/rashmita/Desktop/MidTerm/train_labels_1.csv",index=False)
 #Saving the test features
 test_features = test_df.drop(['id'], axis=1)
-#test_features.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/test_features_1.csv",index=False)
+#test_features.to_csv("C:/Users/rashmita/Desktop/MidTerm/test_features_1.csv",index=False)
 #Saving the test ids for the submission file
 x_testid = test_df.pop('id')
 ###############################################################################
@@ -199,7 +199,7 @@ nnfit = model.fit(train_features,train_labels_cat,batch_size=128,nb_epoch=100,ve
 test_Pred_Labels = model.predict_proba(test_features)
 ##Generate the output file
 submit = pd.DataFrame(test_Pred_Labels ,index=x_testid , columns=encoder.classes_)
-submit.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/submit_NNW.csv")
+submit.to_csv("C:/Users/rashmita/Desktop/MidTerm/submit_NNW.csv")
 
 ###############################################################################
 
@@ -228,7 +228,7 @@ test_labels= clf.predict_proba(test_features)
 
 ##Generate the submission file
 submit = pd.DataFrame(test_labels ,index=x_testid , columns=encoder.classes_)
-submit.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/submit_LOgModel.csv")
+submit.to_csv("C:/Users/rashmita/Desktop/MidTerm/submit_LOgModel.csv")
 ###############################################################################
 
 ##########################3.RANDOM FOREST######################################
@@ -243,7 +243,7 @@ test_labels= clf.predict_proba(test_features)
 
 #Generate the Submission FIle
 submit = pd.DataFrame(test_labels ,index=x_testid , columns=encoder.classes_)
-submit.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/submit_RAFModel.csv")
+submit.to_csv("C:/Users/rashmita/Desktop/MidTerm/submit_RAFModel.csv")
 ###############################################################################
 
 #########################4.SVM#################################################
@@ -258,7 +258,7 @@ test_labels= clf.predict_proba(test_features)
 
 #Generate the Submission FIle
 submit = pd.DataFrame(test_labels ,index=x_testid , columns=encoder.classes_)
-submit.to_csv("C:/Users/parth/Desktop/MIA/MidTerm/submit_SVMModel.csv")
+submit.to_csv("C:/Users/rashmita/Desktop/MidTerm/submit_SVMModel.csv")
 ###############################################################################
 
 
